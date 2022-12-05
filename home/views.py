@@ -1,15 +1,18 @@
 from django.shortcuts import render
-from . models import Agent, Property 
+from . models import *
 from django.http import Http404
 
 # Create your views here.
 
 def index(request):
 	property_list = Property.objects.all()
+	agent = Agent.objects.all()
 
 	context = {
-		'property_list': property_list
+		'property_list': property_list,
+		'gent_list': agent 
 		}
+		
 	return render(request, 'index.html', context)
 
 

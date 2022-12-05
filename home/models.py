@@ -29,15 +29,11 @@ class Category(models.Model):
 
 
 class Property(models.Model):
+	cover = StdImageField('Imagem', upload_to='cover', null=True, blank=True, variations={'thumb': {'width': 370, 'height': 250, 'crop': True }}) 
 	agent = models.ForeignKey(Agent, on_delete=models.CASCADE)
 	title = models.CharField('Título', max_length=255)
 	category = models.ForeignKey(Category, on_delete=models.CASCADE)
 	slug = models.SlugField('Slug', max_length=255, unique=True, null=True, blank=True)
-	image_01 = StdImageField('Imagem', upload_to='Property', null=True, blank=True, variations={'thumb': {'width': 770, 'height': 520, 'crop': True }}) 
-	image_02 = StdImageField('Imagem', upload_to='Property', null=True, blank=True, variations={'thumb': {'width': 770, 'height': 520, 'crop': True }})
-	image_03 = StdImageField('Imagem', upload_to='Property', null=True, blank=True, variations={'thumb': {'width': 770, 'height': 520, 'crop': True }})
-	image_04 = StdImageField('Imagem', upload_to='Property', null=True, blank=True, variations={'thumb': {'width': 770, 'height': 520, 'crop': True }})
-	image_05 = StdImageField('Imagem', upload_to='Property', null=True, blank=True, variations={'thumb': {'width': 770, 'height': 520, 'crop': True }})
 	content = models.TextField()
 	price = models.IntegerField() 
 	address = models.TextField()
@@ -65,3 +61,7 @@ class Property(models.Model):
 		return '{0:.2f}'.format(self.price / 100)
 		
 
+
+class Image(models.Model):
+	property = models.ForeignKey(Property, on_delete=models.CASCADE)
+	image = StdImageField('Imagem', upload_to='property', null=True, blank=True, variations={'thumb': {'width': 770, 'height': 520, 'crop': True }}) 

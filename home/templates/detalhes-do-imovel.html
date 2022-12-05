@@ -87,11 +87,11 @@
                         <div class="property-details-content">
                             <div class="carousel-inner">
                                 <div class="single-item-carousel owl-carousel owl-theme owl-dots-none">
-                                    <figure class="image-box"><img src="{{ property_obj.image_01.thumb.url }}" alt=""></figure>
-                                    <figure class="image-box"><img src="{{ property_obj.image_02.thumb.url }}" alt=""></figure>
-                                    <figure class="image-box"><img src="{{ property_obj.image_03.thumb.url }}" alt=""></figure>
-                                    <figure class="image-box"><img src="{{ property_obj.image_04.thumb.url }}" alt=""></figure>
-                                    <figure class="image-box"><img src="{{ property_obj.image_05.thumb.url }}" alt=""></figure>
+                                   
+                                    {% for i in property_obj.image_set.all %}
+                                        <figure class="image-box"><img src="{{ i.image.thumb.url }}" alt=""></figure>
+                                    {% endfor %}
+                                    
                                 </div>
                             </div>
                             <div class="discription-box content-widget">
