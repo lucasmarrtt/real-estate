@@ -5,18 +5,28 @@ from django.http import Http404
 # Create your views here.
 
 def index(request):
-	property_list = Property.objects.all()
+	property = Property.objects.all()
 	agent = Agent.objects.all()
 
 	context = {
-		'property_list': property_list,
+		'property_list': property,
 		'gent_list': agent 
 		}
 		
 	return render(request, 'index.html', context)
 
 
-def detalhes_do_imovel(request, slug=None):
+def property_list(request):
+	property = Property.objects.all()
+
+	context = {
+		'property_list': property
+
+	}
+	return render(request, 'lista-de-propriedades.html', context)
+
+
+def property_detail(request, slug=None):
 	property_list = Property.objects.all()
 	property_obj = None 
 	if slug is not None:
