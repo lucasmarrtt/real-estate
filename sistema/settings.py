@@ -41,6 +41,12 @@ INSTALLED_APPS = [
 
     # My Apps
     'home',
+
+    # Filter 
+    'django_filters',
+
+    # Widget Tweaks
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

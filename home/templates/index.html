@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +24,10 @@
 
 
         {% include 'includes/header.html' %}
+
+       
+
+
 
 
         <!-- banner-section -->
@@ -96,7 +101,7 @@
                     
 
                     <!-- Loop Here -->
-                    {% for property in property_list %}
+                    {% for property in property_filter.qs %}
 
                     <div class="col-lg-4 col-md-6 col-sm-12 feature-block" style="margin-bottom: 20px;">
                         <div class="feature-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">

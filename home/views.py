@@ -2,15 +2,27 @@ from django.shortcuts import render
 from . models import *
 from django.http import Http404
 
+# Filter 
+from . filters import PropertyFilter
+
 # Create your views here.
 
 def index(request):
+
+	context = {}
+
 	property = Property.objects.all()
 	agent = Agent.objects.all()
 
+	property_filter = PropertyFilter(
+		request.GET,
+		queryset=Property.objects.all()
+	)
+
 	context = {
 		'property_list': property,
-		'gent_list': agent 
+		'gent_list': agent, 
+		'property_filter': property_filter
 		}
 		
 	return render(request, 'index.html', context)

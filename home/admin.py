@@ -14,5 +14,8 @@ class PropertyAdmin(admin.ModelAdmin):
 
 admin.site.register(Agent)
 admin.site.register(Category)
+admin.site.register(State)
+admin.site.register(City)
+admin.site.register(District)
 admin.site.register(Property, PropertyAdmin)
 admin.site.register(Image)

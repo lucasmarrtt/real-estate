@@ -28,6 +28,31 @@ class Category(models.Model):
 
 
 
+class State(models.Model):
+	name = models.CharField('Estado', max_length=255)
+
+	def __str__(self):
+		return self.name 
+
+
+class City(models.Model):
+	name = models.CharField('Cidade', max_length=255)
+	state = models.ForeignKey(State, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.name 
+
+
+class District(models.Model):
+	name = models.CharField('Bairro', max_length=255)
+	state = models.ForeignKey(City, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.name 
+
+
+
+
 class Property(models.Model):
 	cover = StdImageField('Imagem', upload_to='cover', null=True, blank=True, variations={'thumb': {'width': 370, 'height': 250, 'crop': True }}) 
 	agent = models.ForeignKey(Agent, on_delete=models.CASCADE)
@@ -37,9 +62,17 @@ class Property(models.Model):
 	content = models.TextField()
 	price = models.IntegerField() 
 	address = models.TextField()
-	rooms = models.IntegerField('Quartos',)
-	bathrooms = models.IntegerField('Banheiros',)
-	garage_size = models.IntegerField('Vagas na garagem',)
+	NUMBER_CHOICES = (
+		('1', '1'),
+		('2', '2'),
+		('3', '3'),
+		('4', '4'),
+		('5', '5'),
+		('6', '6'),
+		)
+	rooms =  models.CharField('Quartos?', max_length=255, choices=NUMBER_CHOICES)
+	bathrooms = models.CharField('Banheiros?', max_length=255, choices=NUMBER_CHOICES)
+	garage_size = models.CharField('Vagas?', max_length=255, choices=NUMBER_CHOICES)
 	area = models.IntegerField('Área', )
 	TYPE_CHOICES = (
 		('sale', 'Venda'),
@@ -47,8 +80,9 @@ class Property(models.Model):
 		)
 	type_property = models.CharField('Venda ou Aluguel?', max_length=255, choices=TYPE_CHOICES)
 	plant = StdImageField('Planta', upload_to='Plant', null=True, blank=True, variations={'thumb': {'width': 439, 'height': 337, 'crop': True }})
-	city = models.CharField('Cidade', max_length=255)
-	state = models.CharField('Estado', max_length=255)
+	state = models.ForeignKey(State, on_delete=models.CASCADE)
+	city = models.ForeignKey(City, on_delete=models.CASCADE)
+	district = models.ForeignKey(District, on_delete=models.CASCADE)
 	zipcode = models.CharField('CEP', max_length=255)
 	google_maps = models.TextField()
 
