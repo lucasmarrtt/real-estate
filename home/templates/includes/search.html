@@ -66,6 +66,8 @@
                                             
                                             
                                             
+                                        <form method="GET">
+                                            {% csrf_token %}
                                             <div class="advanced-search">
                                                 <div class="close-btn">
                                                     <a href="#" class="close-side-widget"><i class="far fa-times"></i></a>
@@ -189,13 +191,14 @@
 
 
 
-                                                <button style="margin-top: 20px;" class="theme-btn btn-one">Filtrar</button>
+                                                <button style="margin-top: 20px;" type="submit" class="theme-btn btn-one">Filtrar</button>
                                                 
                                             
                                             
                                             
                                             
                                             </div>
+                                        </form>
                                             
                                         
                                             

@@ -15,6 +15,13 @@ class Agent(models.Model):
 	instagram = models.URLField('Instagram',)
 	whatsapp = models.URLField('WhatsApp',)
 
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name = 'Corretor'
+		verbose_name_plural = 'Corretores'	
+
 
 class Category(models.Model):
 	name = models.CharField('Nome da categoria', max_length=255)
@@ -26,6 +33,12 @@ class Category(models.Model):
 		)
 	icon = models.CharField('Icone', max_length=255, choices=ICON_CHOICES)
 
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name = 'Categoria '
+		verbose_name_plural = 'Categorias'
 
 
 class State(models.Model):
@@ -34,34 +47,44 @@ class State(models.Model):
 	def __str__(self):
 		return self.name 
 
+	class Meta:
+		verbose_name = 'Estado'
+		verbose_name_plural = 'Estados'
+	
 
 class City(models.Model):
 	name = models.CharField('Cidade', max_length=255)
 	state = models.ForeignKey(State, on_delete=models.CASCADE)
 
 	def __str__(self):
-		return self.name 
+		return f'{self.name}, {self.state.name}' 
+
+	class Meta:
+		verbose_name = 'Cidade'
+		verbose_name_plural = 'Cidades'	
 
 
 class District(models.Model):
 	name = models.CharField('Bairro', max_length=255)
-	state = models.ForeignKey(City, on_delete=models.CASCADE)
+	city = models.ForeignKey(City, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return self.name 
 
-
+	class Meta:
+		verbose_name = 'Bairro'
+		verbose_name_plural = 'Bairros'		
 
 
 class Property(models.Model):
-	cover = StdImageField('Imagem', upload_to='cover', null=True, blank=True, variations={'thumb': {'width': 370, 'height': 250, 'crop': True }}) 
+	cover = StdImageField('Imagem', upload_to='cover', null=True, blank=True, variations={'thumb': {'width': 300, 'height': 350, 'crop': True }}) 
 	agent = models.ForeignKey(Agent, on_delete=models.CASCADE)
 	title = models.CharField('Título', max_length=255)
 	category = models.ForeignKey(Category, on_delete=models.CASCADE)
 	slug = models.SlugField('Slug', max_length=255, unique=True, null=True, blank=True)
-	content = models.TextField()
-	price = models.IntegerField() 
-	address = models.TextField()
+	content = models.TextField('Descrição', )
+	price = models.IntegerField('Preço',) 
+	address = models.TextField('Endereço',)
 	NUMBER_CHOICES = (
 		('1', '1'),
 		('2', '2'),
@@ -70,9 +93,9 @@ class Property(models.Model):
 		('5', '5'),
 		('6', '6'),
 		)
-	rooms =  models.CharField('Quartos?', max_length=255, choices=NUMBER_CHOICES)
-	bathrooms = models.CharField('Banheiros?', max_length=255, choices=NUMBER_CHOICES)
-	garage_size = models.CharField('Vagas?', max_length=255, choices=NUMBER_CHOICES)
+	rooms =  models.CharField('Quartos', max_length=255, choices=NUMBER_CHOICES)
+	bathrooms = models.CharField('Banheiros', max_length=255, choices=NUMBER_CHOICES)
+	garage_size = models.CharField('Vagas', max_length=255, choices=NUMBER_CHOICES)
 	area = models.IntegerField('Área', )
 	TYPE_CHOICES = (
 		('sale', 'Venda'),
@@ -93,8 +116,11 @@ class Property(models.Model):
 
 	def get_display_price(self):
 		return '{0:.2f}'.format(self.price / 100)
-		
 
+	class Meta:
+		verbose_name = 'Imóvel'
+		verbose_name_plural = 'Imóveis'		
+		
 
 class Image(models.Model):
 	property = models.ForeignKey(Property, on_delete=models.CASCADE)
