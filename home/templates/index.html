@@ -109,34 +109,34 @@
                                 <div class="image-box">
                                     <figure class="image"><img src="{{ property.cover.url  }}" alt=""></figure>
                                     <div class="batch"><i class="icon-11"></i></div>
-                                    <span class="category">Featured</span>
+                                    <span class="category">{{ property.category }}</span>
                                 </div>
                                 <div class="lower-content">
                                     <div class="author-info clearfix">
                                         <div class="author pull-left">
                                             <figure class="author-thumb"><img src="{{ property.agent.image.thumb.url  }}" alt=""></figure>
-                                            <h6>{{ property.agent.name }}</h6>
+                                            <h6>{{ property.agent.name|truncatechars:18 }}</h6>
                                         </div>
-                                        <div class="buy-btn pull-right"><a href="property-details.html">For Buy</a></div>
+                                        <div class="buy-btn pull-right"><a href="/detalhes-do-imovel/{{ property.slug }}">{{ property.type_property }}</a></div>
                                     </div>
-                                    <div class="title-text"><h4><a href="/detalhes-do-imovel/{{ property.slug }}">{{ property.title }}</a></h4></div>
+                                    <div class="title-text"><h4><a href="/detalhes-do-imovel/{{ property.slug }}">{{ property.title|truncatechars:40 }}</a></h4></div>
                                     <div class="price-box clearfix">
                                         <div class="price-info pull-left">
-                                            <h6>Start From</h6>
+                                            <h6>Preço</h6>
                                             <h4>R$ {{ property.price }}</h4>
                                         </div>
                                         <ul class="other-option pull-right clearfix">
-                                            <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                            <li><a href="property-details.html"><i class="icon-13"></i></a></li>
+                                            <li><a href="#"><i class="icon-12"></i></a></li>
+                                            <li><a href="#"><i class="icon-13"></i></a></li>
                                         </ul>
                                     </div>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
+                                    <p>{{ property.content|truncatechars:80 }}</p>
                                     <ul class="more-details clearfix">
                                         <li><i class="icon-14"></i>{{ property.bathrooms }}</li>
                                         <li><i class="icon-15"></i>{{ property.garage_size }}</li>
                                         <li><i class="icon-16"></i>{{ property.area }}</li>
                                     </ul>
-                                    <div class="btn-box"><a href="/detalhes-do-imovel/{{ property.slug }}" class="theme-btn btn-two">Ver detalhes</a></div>
+                                    <div class="btn-box"><a href="/detalhes-do-imovel/{{ property.slug }}" class="theme-btn btn-two">Detalhes</a></div>
                                 </div>
                             </div>
                         </div>

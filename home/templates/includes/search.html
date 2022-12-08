@@ -62,7 +62,7 @@
                                         
                                         </div>
                                         <div class="switch_btn_one ">
-                                            <button class="nav-btn nav-toggler navSidebar-button clearfix search__toggler">Filtro avançado<i class="fas fa-angle-down"></i></button>
+                                            <button class="nav-btn nav-toggler navSidebar-button clearfix search__toggler">Busca avançada<i class="fas fa-angle-down"></i></button>
                                             
                                             
                                             
@@ -215,29 +215,28 @@
                                     <div class="inner-box">
                                         <div class="top-search">
                                             
-                                            
-                                            <!-- Form 1 -->
-                                            <form action="{ url 'lista-de-imoveis' }" method="post" class="search-form">
+                                            <!-- Form 2-->
+                                            <form action="" method="GET" class="search-form">
+                                                {% csrf_token %}
                                                 <div class="row clearfix">
                                                     <div class="col-lg-4 col-md-12 col-sm-12 column">
                                                         <div class="form-group">
                                                             <label>Buscar Imóvel</label>
+                                                        
                                                             <div class="field-input">
                                                                 <i class="fas fa-search"></i>
-                                                                <input type="search" name="search-field" placeholder="Busque por: Imóvel, cidade, bairro, tipo" required="">
+                                                                <input type="search" name="title" placeholder="Busque por: Imóvel, cidade, bairro, tipo">
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-6 col-sm-12 column">
                                                         <div class="form-group">
-                                                            <label>Localização</label>
+                                                            <label>Categoria</label>
                                                             <div class="select-box">
                                                                 <i class="far fa-compass"></i>
-                                                                <select class="wide">
-                                                                   <option data-display="Localização">Localização</option>
-                                                                   <option value="1">São Paulo</option>
-                                                                  
-                                                                </select>
+                                                                
+                                                                {% render_field property_filter.form.category placeholder="Nome" class="wide" %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -245,9 +244,9 @@
                                                         <div class="form-group">
                                                             <label>Tipo</label>
                                                             <div class="select-box">
-                                                                <select class="wide">
-                                                                   <option data-display="Tipo">Tipo</option>
-                                                                   <option value="1">Venda</option>
+                                                                <select name="type_property" class="wide">
+                                                                   <option value="rent" data-display="Aluguel">Aluguel</option>
+                                                                
                                                                   
                                                                 </select>
                                                             </div>
@@ -263,115 +262,144 @@
                                         
                                         </div>
                                         <div class="switch_btn_one ">
-                                            <button class="nav-btn nav-toggler navSidebar-button clearfix search__toggler">Advanced Search<i class="fas fa-angle-down"></i></button>
+                                            <button class="nav-btn nav-toggler navSidebar-button clearfix search__toggler">Busca avançada<i class="fas fa-angle-down"></i></button>
                                             
                                             
                                             
                                              
-                                            <div class="advanced-search">
-                                                <div class="close-btn">
-                                                    <a href="#" class="close-side-widget"><i class="far fa-times"></i></a>
-                                                </div>
-                                                <div class="row clearfix">
-                                                    <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                        <div class="form-group">
-                                                            <label>Estado</label>
-                                                            <div class="select-box">
-                                                                <select class="wide">
-                                                                   <option data-display="Selecione o estado">Selecione o estado</option>
-                                                                   <option value="1">São Paulo</option>
-                                                                   
-                                                                </select>
-                                                            </div>
-                                                        </div>
+                                            <form method="GET">
+                                                {% csrf_token %}
+                                                <div class="advanced-search">
+                                                    <div class="close-btn">
+                                                        <a href="#" class="close-side-widget"><i class="far fa-times"></i></a>
                                                     </div>
-                                                    <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                        <div class="form-group">
-                                                            <label>Cidade</label>
-                                                            <div class="select-box">
-                                                                <select class="wide">
-                                                                   <option data-display="Selecione a cidade">Selecione a cidade</option>
-                                                                   <option value="1">São Paulo</option>
-                                                                 
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                        <div class="form-group">
-                                                            <label>Bairro</label>
-                                                            <div class="select-box">
-                                                                <select class="wide">
-                                                                   <option data-display="Selecione o bairro">Selecione o bairro</option>
-                                                                   <option value="1">Grajaú</option>
-                                                             
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                        <div class="form-group">
-                                                            <label>Banheiros</label>
-                                                            <div class="select-box">
-                                                                <select class="wide">
-                                                                   <option data-display="Banheiros">Banheiros</option>
-                                                                   <option value="1">1</option>
-                                                                   <option value="2">2</option>
-                                                                
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                        <div class="form-group">
-                                                            <label>Quartos</label>
-                                                            <div class="select-box">
-                                                                <select class="wide">
-                                                                   <option data-display="Quartos">Quartos</option>
-                                                                   <option value="1">1</option>
-                                                                   <option value="2">2</option>
-                                                                   
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                        <div class="form-group">
-                                                            <label>Vagas</label>
-                                                            <div class="select-box">
-                                                                <select class="wide">
-                                                                   <option data-display="Vagas">Vagas</option>
-                                                                   <option value="1">1</option>
-                                                                   <option value="2">2</option>
-                                                               
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="range-box">
                                                     <div class="row clearfix">
-                                                        <div class="col-lg-6 col-md-6 col-sm-12 column">
-                                                            <div class="price-range">
-                                                                <h6>Preço</h6>
-                                                                <div class="range-input">
-                                                                    <div class="input"><input type="text" class="property-amount" name="field-name" readonly=""></div>
+                                                        <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                            <div class="form-group">
+                                                                <label>Estado</label>
+                                                                <div class="select-box">
+                                                                    {% render_field property_filter.form.state placeholder="Nome" class="wide" %}
+                                                                    <!--
+                                                                    <select class="wide">
+                                                                       <option data-display="Selecione o estado">Selecione o estado</option>
+                                                                       <option value="1">São Paulo</option>
+                                                                       
+                                                                    </select> -->
                                                                 </div>
-                                                                <div class="price-range-slider"></div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-12 column">
-                                                            <div class="area-range">
-                                                                <h6>Tamanho</h6>
-                                                                <div class="range-input">
-                                                                    <div class="input"><input type="text" class="area-range" name="field-name" readonly=""></div>
+                                                        <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                            <div class="form-group">
+                                                                <label>Cidade</label>
+                                                                <div class="select-box">
+                                                                    {% render_field property_filter.form.city placeholder="Nome" class="wide" %}
+                                                                    <!--
+                                                                    <select class="wide">
+                                                                       <option data-display="Selecione a cidade">Selecione a cidade</option>
+                                                                       <option value="1">São Paulo</option>
+                                                                     
+                                                                    </select>
+                                                                    -->
                                                                 </div>
-                                                                <div class="area-range-slider"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                            <div class="form-group">
+                                                                <label>Bairro</label>
+                                                                <div class="select-box">
+                                                                    {% render_field property_filter.form.district placeholder="Nome" class="wide" %}
+                                                                    <!-- 
+                                                                    <select class="wide">
+                                                                       <option data-display="Selecione o bairro">Selecione o bairro</option>
+                                                                       <option value="1">Grajaú</option>
+                                                                 
+                                                                    </select>
+                                                                    -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                            <div class="form-group">
+                                                                <label>Banheiros</label>
+                                                                <div class="select-box">
+                                                                    {% render_field property_filter.form.bathrooms placeholder="Nome" class="wide" %}
+                                                                    <!--
+                                                                    <select class="wide">
+                                                                       <option data-display="Banheiros">Banheiros</option>
+                                                                       <option value="1">1</option>
+                                                                       <option value="2">2</option>
+                                                                    
+                                                                    </select>
+                                                                    -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                            <div class="form-group">
+                                                                <label>Quartos</label>
+                                                                <div class="select-box">
+                                                                    {% render_field property_filter.form.rooms placeholder="Nome" class="wide" %}
+                                                                    <!--
+                                                                    <select class="wide">
+                                                                       <option data-display="Quartos">Quartos</option>
+                                                                       <option value="1">1</option>
+                                                                       <option value="2">2</option>
+                                                                       
+                                                                    </select>
+                                                                    -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                            <div class="form-group">
+                                                                <label>Vagas</label>
+                                                                <div class="select-box">
+                                                                    {% render_field property_filter.form.garage_size placeholder="Nome" class="wide" %}
+                                                                    <!-- 
+                                                                    <select class="wide">
+                                                                       <option data-display="Vagas">Vagas</option>
+                                                                       <option value="1">1</option>
+                                                                       <option value="2">2</option>
+                                                                   
+                                                                    </select>
+                                                                    -->
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="range-box">
+                                                        <div class="row clearfix">
+                                                            <div class="col-lg-6 col-md-6 col-sm-12 column">
+                                                                <div class="price-range">
+                                                                    <h6>Preço</h6>
+                                                                    <div class="range-input">
+                                                                        <div class="input"><input type="text" class="property-amount" name="field-name" readonly=""></div>
+                                                                    </div>
+                                                                    <div class="price-range-slider"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-12 column">
+                                                                <div class="area-range">
+                                                                    <h6>Tamanho</h6>
+                                                                    <div class="range-input">
+                                                                        <div class="input"><input type="text" class="area-range" name="field-name" readonly=""></div>
+                                                                    </div>
+                                                                    <div class="area-range-slider"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+    
+    
+                                                    <button style="margin-top: 20px;" type="submit" class="theme-btn btn-one">Filtrar</button>
+                                                    
+                                                
+                                                
+                                                
+                                                
                                                 </div>
-                                            </div>
+                                            </form>
                                         
                                         
                                         
